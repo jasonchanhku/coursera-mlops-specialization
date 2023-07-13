@@ -59,11 +59,7 @@ Take a look at the command that will spin up a container to serve the model unde
 
 
 ```bash
-docker run --rm -p 8501:8501 \
-  --mount type=bind,\
-source=/tmp/tfserving/serving/tensorflow_serving/servables/tensorflow/testdata/saved_model_half_plus_two_cpu,\
-target=/models/half_plus_two \
-  -e MODEL_NAME=half_plus_two -t tensorflow/serving &
+start docker run --rm -p 8501:8501 --mount type=bind,source=%cd%/serving/tensorflow_serving/servables/tensorflow/testdata/saved_model_half_plus_two_cpu,target=/models/half_plus_two -e MODEL_NAME=half_plus_two -t tensorflow/serving
 ```
 
 Wow, there is a lot of information in this command. Let's break it down to understand what every flag is doing:
@@ -89,8 +85,7 @@ Since you need to provide some data that the server will process you should use 
 Let's do inference for a batch of three numbers, open a new command line window or tab and run the following command:
 
 ```bash
-curl -d '{"instances": [1.0, 2.0, 5.0]}' \
-  -X POST http://localhost:8501/v1/models/half_plus_two:predict
+curl -d "{\"instances\": [1.0, 2.0, 5.0]}" -X POST http://localhost:8501/v1/models/half_plus_two:predict
 ```
 
 As with the `docker run` command let's break down the flags in this one:
