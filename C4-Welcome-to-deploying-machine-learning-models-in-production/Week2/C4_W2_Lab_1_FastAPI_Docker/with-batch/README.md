@@ -103,9 +103,10 @@ Once again it is time to test your server by actually using it for prediction. I
 To get the predictions for a batch of 32 wines (found in the batch_1.json file) you can send a `POST` request to the server using `curl` like this:
 
 ```bash
-curl -X POST http://localhost:81/predict \
-    -d @./wine-examples/batch_1.json \
-    -H "Content-Type: application/json"
+curl -X POST ^
+  http://localhost:81/predict ^
+  -d @./wine-examples/batch_1.json ^
+  -H "Content-Type: application/json"
 ```
 
 Now you should see a list with the 32 predictions (in order) for each one of the data points within the batch. **Nice work!**
